@@ -180,7 +180,7 @@ export default function PortfolioPage() {
             >
               {/* Thumbnail Container (큰 영상 팝업 띄우기 / 썸네일 이미지 보여주기) */}
               <div 
-                className={`group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer ${project.id === 6 ? 'p-6' : ''}`}
+                className="group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   if (project.videoUrl) {
@@ -418,7 +418,7 @@ export default function PortfolioPage() {
                 className="w-full h-full bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group"
               >
                 <div 
-                  className={`w-full h-full relative group cursor-pointer ${project.id === 6 ? 'p-12' : ''}`}
+                  className="w-full h-full relative group cursor-pointer"
                   onClick={() => {
                     if (project.videoUrl) {
                       setSelectedVideo({ url: project.videoUrl, title: project.title });
