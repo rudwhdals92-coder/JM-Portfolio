@@ -9,7 +9,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "My Cute Portfolio",
+  title: "JM Portfolio",
   description: "A cute and interactive video portfolio",
 };
 
