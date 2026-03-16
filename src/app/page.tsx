@@ -77,6 +77,7 @@ const projects = [
     videoUrl: "https://youtube.com/shorts/0vPWGIkDaCU?feature=share",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일6.jpg",
     gifs: ["/JM-Portfolio/GIFs/6-1.mp4", "/JM-Portfolio/GIFs/6-2.mp4", "/JM-Portfolio/GIFs/6-3.mp4", "/JM-Portfolio/GIFs/6-4.mp4"],
+    isShorts: true,
   },
 ];
 
@@ -180,7 +181,7 @@ export default function PortfolioPage() {
             >
               {/* Thumbnail Container (큰 영상 팝업 띄우기 / 썸네일 이미지 보여주기) */}
               <div 
-                className="group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer"
+                className={`group relative z-10 ${project.isShorts ? 'aspect-[9/16] w-[60%] max-w-[300px] mx-auto' : 'aspect-video'} rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer`}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (project.videoUrl) {
@@ -415,7 +416,7 @@ export default function PortfolioPage() {
               <motion.div
                 animate={{ y: [-12, 12, -12] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="w-full h-full bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group"
+                className={`bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group ${project.isShorts ? 'h-full aspect-[9/16] mx-auto' : 'w-full h-full'}`}
               >
                 <div 
                   className="w-full h-full relative group cursor-pointer"
