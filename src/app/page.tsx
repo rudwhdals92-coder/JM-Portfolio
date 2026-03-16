@@ -181,7 +181,7 @@ export default function PortfolioPage() {
             >
               {/* Thumbnail Container (큰 영상 팝업 띄우기 / 썸네일 이미지 보여주기) */}
               <div 
-                className={`group relative z-10 ${project.isShorts ? 'aspect-[9/16] w-[60%] max-w-[300px] mx-auto' : 'aspect-video'} rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer`}
+                className="group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   if (project.videoUrl) {
@@ -193,7 +193,7 @@ export default function PortfolioPage() {
                   <img 
                     src={project.thumbnailUrl} 
                     alt={`${project.title} thumbnail`} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className={`w-full h-full ${project.isShorts ? 'object-contain bg-black' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`}
                   />
                 ) : (
                   <OptimizedVideo 
@@ -416,7 +416,7 @@ export default function PortfolioPage() {
               <motion.div
                 animate={{ y: [-12, 12, -12] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className={`bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group ${project.isShorts ? 'h-full aspect-[9/16] mx-auto' : 'w-full h-full'}`}
+                className="w-full h-full bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group"
               >
                 <div 
                   className="w-full h-full relative group cursor-pointer"
@@ -431,7 +431,7 @@ export default function PortfolioPage() {
                       <img 
                         src={project.thumbnailUrl} 
                         alt={`${project.title} thumbnail`} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className={`w-full h-full ${project.isShorts ? 'object-contain bg-black' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`}
                       />
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
