@@ -87,8 +87,6 @@ const otherProjects = [
   { id: 102, title: "코난 AI 실사화 영상", videoUrl: "/videos/코난실사화_경종민.mp4" },
   { id: 103, title: "유튜브 양산형 쇼츠 영상", videoUrl: "/videos/유튜브쇼츠수정.mp4" },
   { id: 105, title: "Coming Soon...", videoUrl: "" },
-  { id: 106, title: "Coming Soon...", videoUrl: "" },
-  { id: 107, title: "Coming Soon...", videoUrl: "" },
 ];
 
 export default function PortfolioPage() {
