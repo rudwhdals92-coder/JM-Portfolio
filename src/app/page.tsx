@@ -26,7 +26,7 @@ const projects = [
     title: "Spotify on Naver\n모션그래픽 영상",
     description: "본 영상은 네이버 멤버십에 새롭게 추가된 혜택인 Spotify 서비스를 주제로 제작한 모션그래픽 영상입니다.\n\n희망차고 신나는 음악의 분위기에 맞는 캐릭터를 기획하고, ‘노력하는 자의 꿈은 이루어진다’는 메시지를 담은 스토리를 기반으로 음악과 영상을 제작했습니다. AI 기반 이미지 생성과 영상 제작 도구를 활용하여 장면을 구성하고 편집해 하나의 애니메이션 뮤직비디오로 완성했습니다.\n\n본 작업을 통해 AI 기술을 활용한 콘텐츠 제작 과정과 창작 workflow를 경험하고, AI 기반 영상 콘텐츠 제작 가능성을 탐구하고자 했습니다.",
     tools: ["After Effects", "Photoshop"],
-    videoUrl: "/JM-Portfolio/videos/애프터이펙트 과제_경종민.mp4",
+    videoUrl: "https://youtu.be/ilJBblLfQkQ",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일2.jpg",
     gifs: ["/JM-Portfolio/GIFs/2-1.mp4", "/JM-Portfolio/GIFs/2-2.mp4", "/JM-Portfolio/GIFs/2-3.mp4", "/JM-Portfolio/GIFs/2-4.mp4"],
   },
@@ -39,7 +39,7 @@ const projects = [
       { category: "Image", tool: "Midjourney" },
       { category: "Video", tool: "Midjourney" }
     ],
-    videoUrl: "/JM-Portfolio/videos/화장품AI광고_경종민.mp4",
+    videoUrl: "https://youtu.be/OaXkgpuatkI",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일3.jpg",
     gifs: ["/JM-Portfolio/GIFs/3-1.mp4", "/JM-Portfolio/GIFs/3-2.mp4", "/JM-Portfolio/GIFs/3-3.mp4", "/JM-Portfolio/GIFs/3-4.mp4"],
   },
@@ -52,7 +52,7 @@ const projects = [
       { category: "Image", tool: "Nanobanana Pro, Grok" },
       { category: "Video", tool: "Kling2.5 turbo, Grok" }
     ],
-    videoUrl: "/JM-Portfolio/videos/루에랑ai광고_경종민.mp4",
+    videoUrl: "https://youtu.be/sdgdKuQ72kQ",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일4.jpg",
     gifs: ["/JM-Portfolio/GIFs/4-1.mp4", "/JM-Portfolio/GIFs/4-2.mp4", "/JM-Portfolio/GIFs/4-3.mp4", "/JM-Portfolio/GIFs/4-4.mp4"],
   },
@@ -61,7 +61,7 @@ const projects = [
     title: "키네틱 타이포그래피 영상",
     description: "본 영상은 PLAVE의 ‘BBUU!’ 노래를 기반으로 제작한 키네틱 타이포그래피 영상입니다.\n\n곡이 가지고 있는 밝고 귀여운 분위기를 유지하면서 가사와 음악의 리듬에 맞춘 타이포그래피 모션을 중심으로 영상을 구성했습니다. 특히 반복되는 가사 구간이 지루하게 느껴지지 않도록 다양한 모션과 표현 방식을 활용해 리듬감 있는 장면을 제작하는 데 집중했습니다.\n\n노래의 템포와 분위기에 어울리는 타이포그래피 움직임을 통해 음악의 에너지를 시각적으로 표현하고자 했습니다.",
     tools: ["Premiere Pro", "After Effects"],
-    videoUrl: "/JM-Portfolio/videos/키네틱타이포_경종민.mp4",
+    videoUrl: "https://youtu.be/ZbSRwKALTPc",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일5.jpg",
     gifs: ["/JM-Portfolio/GIFs/5-1.mp4", "/JM-Portfolio/GIFs/5-2.mp4", "/JM-Portfolio/GIFs/5-3.mp4", "/JM-Portfolio/GIFs/5-4.mp4"],
   },
@@ -74,7 +74,7 @@ const projects = [
       { category: "Image", tool: "Nanobanana Pro" },
       { category: "Video", tool: "Kling" }
     ],
-    videoUrl: "/JM-Portfolio/videos/메이플 스토리 메인_경종민.mp4",
+    videoUrl: "https://youtube.com/shorts/0vPWGIkDaCU?feature=share",
     thumbnailUrl: "/JM-Portfolio/GIFs/썸네일6.jpg",
     gifs: ["/JM-Portfolio/GIFs/6-1.mp4", "/JM-Portfolio/GIFs/6-2.mp4", "/JM-Portfolio/GIFs/6-3.mp4", "/JM-Portfolio/GIFs/6-4.mp4"],
   },
@@ -826,7 +826,7 @@ export default function PortfolioPage() {
             <div className="w-full h-full rounded-2xl shadow-2xl overflow-hidden border border-foreground/10 pointer-events-auto relative bg-black">
                {selectedVideo.url.includes("youtu") ? (
                  <iframe
-                   src={selectedVideo.url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/") + "?autoplay=1"}
+                   src={selectedVideo.url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/").replace("youtube.com/shorts/", "www.youtube.com/embed/").split("?")[0] + "?autoplay=1"}
                    className="w-full h-full border-none"
                    allow="autoplay; encrypted-media"
                    allowFullScreen
