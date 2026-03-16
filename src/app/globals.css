@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  /* Cute Pastel Palette */
+  --background: #fffbfa; /* Soft warm cream */
+  --foreground: #4a4a4a; /* Soft dark gray for readability */
+  --primary: #a1c4fd; /* Pastel Light Blue */
+  --secondary: #e2f0cb; /* Pastel Mint/Green */
+  --tertiary: #b5ead7; /* Pastel Cyan */
+  --accent: #ffdac1; /* Pastel Peach */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-accent: var(--accent);
+  
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  /* Adding bounce and wiggle animations for cuteness */
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-bounce-soft: bounce-soft 2s infinite;
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  @keyframes bounce-soft {
+    0%, 100% {
+      transform: translateY(-5%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for a cute look */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fffbfa;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8bb5ff;
+}
