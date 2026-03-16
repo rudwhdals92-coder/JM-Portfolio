@@ -106,40 +106,35 @@ export default function PortfolioPage() {
 
   // 스크롤 위치에 따라 현재 활성화된 프로젝트 인덱스 업데이트
   useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const sections = document.querySelectorAll(".project-video-section");
-          let closestIndex = activeIndex;
-          let minDistance = Infinity;
-          const centerY = window.innerHeight / 2;
-
-          sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            // Calculate distance from the center of the viewport to the center of the section
-            const sectionCenterY = rect.top + rect.height / 2;
-            const distance = Math.abs(centerY - sectionCenterY);
-
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestIndex = index;
-            }
-          });
-          
-          if (closestIndex !== activeIndex) {
-            setActiveIndex(closestIndex);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
+    const observerOptions = {
+      root: null,
+      rootMargin: "-45% 0px -45% 0px", // 화면 중앙 10% 영역에 들어올 때 감지
+      threshold: 0,
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const indexStr = entry.target.getAttribute("data-index");
+          if (indexStr !== null) {
+            setActiveIndex(Number(indexStr));
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = document.querySelectorAll(".project-video-section");
+    
+    sections.forEach((section, index) => {
+      if (!section.hasAttribute("data-index")) {
+        section.setAttribute("data-index", index.toString());
+      }
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [activeIndex]);
 
   return (
     <>
