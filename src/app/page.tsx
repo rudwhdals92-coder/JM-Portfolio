@@ -10,7 +10,7 @@ const projects = [
   {
     id: 1,
     title: "AI anime MV",
-    description: "본 영상은 캐릭터의 외모와 세계관 설정부터 기획, 제작까지 전 과정을 혼자 진행하여 AI 도구를 활용해 제작한 2분 길이의 애니메이션 뮤직비디오입니다.\n\n희망차고 신나는 음악의 분위기에 맞는 캐릭터를 기획하고, ‘노력하는 자의 꿈은 이루어진다’는 메시지를 담은 스토리를 기반으로 음악과 영상을 제작했습니다. AI 기반 이미지 생성과 영상 제작 도구를 활용하여 장면을 구성하고 편집해 하나의 애니메이션 뮤직비디오로 완성했습니다.\n\n본 작업을 통해 AI 기술을 활용한 콘텐츠 제작 과정과 창작 workflow를 경험하고, AI 기반 영상 콘텐츠 제작 가능성을 탐구하고자 했습니다.",
+    description: "캐릭터의 외형 및 세계관 설정부터 기획, 제작까지 전 과정을 단독으로 수행하여, AI 도구를 활용한 2분 길이의 애니메이션 뮤직비디오를 제작하였습니다.\n\n희망차고 경쾌한 음악의 분위기에 맞춰 캐릭터를 기획하고, ‘노력하는 자의 꿈은 이루어진다’는 메시지를 중심으로 스토리를 구성했습니다.\n\nKling을 활용해 장면 간 시각적 일관성을 유지한 비주얼을 제작하고, Premiere Pro를 통해 리듬감 있는 컷 편집과 인서트 활용으로 자연스러운 장면 전환을 구현했습니다. 이를 통해 AI 기반 제작 워크플로우를 경험하고 콘텐츠 제작 가능성을 확장했습니다.",
     tools: ["Premiere Pro"],
     aiTools: [
       { category: "Music", tool: "Suno" },
@@ -24,7 +24,7 @@ const projects = [
   {
     id: 2,
     title: "Spotify on Naver\n모션그래픽 영상",
-    description: "본 영상은 네이버 멤버십에 새롭게 추가된 혜택인 Spotify 서비스를 주제로 제작한 모션그래픽 영상입니다.\n\n희망차고 신나는 음악의 분위기에 맞는 캐릭터를 기획하고, ‘노력하는 자의 꿈은 이루어진다’는 메시지를 담은 스토리를 기반으로 음악과 영상을 제작했습니다. AI 기반 이미지 생성과 영상 제작 도구를 활용하여 장면을 구성하고 편집해 하나의 애니메이션 뮤직비디오로 완성했습니다.\n\n본 작업을 통해 AI 기술을 활용한 콘텐츠 제작 과정과 창작 workflow를 경험하고, AI 기반 영상 콘텐츠 제작 가능성을 탐구하고자 했습니다.",
+    description: "네이버 멤버십에 새롭게 추가된 Spotify 서비스를 주제로, 서비스의 주요 기능과 사용 방법을 효과적으로 전달하기 위한 모션그래픽 영상을 제작하였습니다.\n\n사용자들이 서비스를 직관적으로 이해하고 활용할 수 있도록 핵심 기능 중심으로 콘텐츠를 구성하고, 빠른 템포의 BGM과 다양한 모션을 활용해 몰입도를 높였습니다.\n\nAfter Effects의 3D 요소를 활용해 입체적인 연출을 구현하고, Photoshop을 통해 실제 애플리케이션 UI와 유사한 화면을 제작하여 현실감을 강화했습니다. 이를 통해 정보 전달과 시각적 흥미를 동시에 고려한 콘텐츠 제작 역량을 강화했습니다.",
     tools: ["After Effects", "Photoshop"],
     videoUrl: "https://youtu.be/ilJBblLfQkQ",
     thumbnailUrl: "/GIFs/썸네일2.jpg",
@@ -33,7 +33,7 @@ const projects = [
   {
     id: 3,
     title: "꼬달리 AI 광고 영상",
-    description: "본 영상은 AI 이미지 생성 도구인 Midjourney를 활용하여 제작한 화장품 광고 영상입니다.\n\n프랑스의 내추럴 뷰티 브랜드 'Caudalie(꼬달리)'의 브랜드 이미지를 분석하여 자연 친화적인 콘셉트를 중심으로 광고 영상을 기획했습니다. 특히 브랜드의 핵심 성분인 포도나무 추출물을 시각적으로 강조하는 연출을 통해 자연 유래 성분을 사용하는 브랜드 아이덴티티를 표현하고자 했습니다.\n\nAI 기반 이미지 생성 기술을 활용하여 자연적인 질감과 분위기를 강조한 장면을 제작하고 이를 영상으로 구성하여 화장품 광고 콘텐츠를 완성했습니다.",
+    description: "AI 이미지 생성 도구인 Midjourney를 활용하여 프랑스 내추럴 뷰티 브랜드 ‘Caudalie(꼬달리)’를 주제로 한 화장품 광고 영상을 제작하였습니다.\n\n브랜드의 자연 친화적인 이미지를 분석해 ‘자연 유래 성분’이라는 콘셉트를 도출하고, 이를 중심으로 영상의 방향을 기획했습니다.\n\n주요 성분인 포도나무 추출물을 시각적으로 강조하는 연출을 통해 브랜드 아이덴티티를 표현했으며, Midjourney를 활용해 자연적인 질감과 분위기를 살린 비주얼을 제작하고 이를 영상으로 구성하여 감성적인 화장품 광고 콘텐츠로 완성했습니다. 이를 통해 브랜드 콘셉트를 시각적으로 구현하는 방법을 경험할 수 있었습니다.",
     tools: ["Premiere Pro", "After Effects"],
     aiTools: [
       { category: "Image", tool: "Midjourney" },
@@ -46,7 +46,7 @@ const projects = [
   {
     id: 4,
     title: "AI 공모전 광고 영상",
-    description: "본 영상은 제2회 매경미디어 AI 영상 광고·숏폼 공모전에 출품하기 위해 제작한 AI 영상 광고입니다.\n\n공모전 주제에 맞춰 한국을 대표하는 음식인 치킨을 소재로 한국에서 세계로 뻗어나가는 스토리를 중심으로 영상을 기획했습니다. AI 영상 제작 기술을 활용하여 치킨 브랜드가 글로벌 시장으로 확장되는 과정을 스토리 형식의 영상으로 표현하고자 했습니다.",
+    description: "제2회 매경미디어 AI 영상 광고·숏폼 공모전에 출품하기 위해 AI 기반 영상 광고를 제작하였습니다.\n\n공모전 주제에 맞춰 한국을 대표하는 음식인 ‘치킨’을 소재로, 국내를 넘어 글로벌 시장으로 확장되는 과정을 중심으로 영상을 기획했습니다.\n\n브랜드가 성장하며 세계로 뻗어나가는 흐름을 스토리 기반으로 구성하고, AI 영상 제작 기술을 활용해 장면을 연출하여 시각적 전개가 자연스럽게 이어지도록 제작했습니다. 특히 브랜드의 글로벌 확장 과정을 서사 중심의 스토리텔링 방식으로 구성하여, 영상의 몰입도와 완성도를 높였습니다.",
     tools: ["Premiere Pro"],
     aiTools: [
       { category: "Image", tool: "Nanobanana Pro, Grok" },
@@ -59,7 +59,7 @@ const projects = [
   {
     id: 5,
     title: "키네틱 타이포그래피 영상",
-    description: "본 영상은 PLAVE의 ‘BBUU!’ 노래를 기반으로 제작한 키네틱 타이포그래피 영상입니다.\n\n곡이 가지고 있는 밝고 귀여운 분위기를 유지하면서 가사와 음악의 리듬에 맞춘 타이포그래피 모션을 중심으로 영상을 구성했습니다. 특히 반복되는 가사 구간이 지루하게 느껴지지 않도록 다양한 모션과 표현 방식을 활용해 리듬감 있는 장면을 제작하는 데 집중했습니다.\n\n노래의 템포와 분위기에 어울리는 타이포그래피 움직임을 통해 음악의 에너지를 시각적으로 표현하고자 했습니다.",
+    description: "PLAVE의 ‘BBUU!’ 곡을 기반으로, 음악의 리듬과 가사를 시각적으로 표현한 키네틱 타이포그래피 영상을 제작하였습니다. 밝고 귀여운 곡의 분위기를 유지하면서 가사와 비트에 맞춘 타이포그래피 모션을 중심으로 영상을 구성했습니다.\n\n특히 반복되는 가사 구간이 지루하게 느껴지지 않도록 다양한 모션과 표현 방식을 적용하여 리듬감 있는 장면을 연출했으며, After Effects를 활용해 프레임 단위로 음악의 비트와 타이밍에 정교하게 맞춘 모션 디테일을 구현했습니다. 이를 통해 타이포그래피의 움직임으로 음악의 에너지를 시각적으로 전달하고자 했습니다.",
     tools: ["Premiere Pro", "After Effects"],
     videoUrl: "https://youtu.be/ZbSRwKALTPc",
     thumbnailUrl: "/GIFs/썸네일5.jpg",
@@ -68,7 +68,7 @@ const projects = [
   {
     id: 6,
     title: "메이플스토리 23주년\n인포그래픽 영상",
-    description: "본 영상은 게임 메이플스토리 23주년 이벤트를 주제로 제작한 정보 전달 중심의 인포그래픽 영상입니다.\n\n이벤트 내용을 사용자에게 효과적으로 전달하기 위해 빠른 장면 전환과 시각적인 요소를 활용하여 인포그래픽 형태의 영상을 제작했습니다. 공식 이미지에 등장하는 캐릭터들을 Illustrator를 활용해 리깅이 가능한 캐릭터 형태로 제작하여 영상에 활용했으며, 이벤트와 관련된 알려진 요소들을 놀이기구 이미지로 구성하여 시각적인 재미를 더했습니다.\n\n또한 일부 장면에서는 AI를 활용하여 제작한 이미지를 영상으로 만들어 다양한 시각 요소를 활용한 인포그래픽 콘텐츠로 완성했습니다.",
+    description: "게임 ‘메이플스토리’ 23주년 이벤트를 주제로, 이벤트 정보를 효과적으로 전달하기 위한 인포그래픽 영상을 제작하였습니다. 빠른 장면 전환과 다양한 시각 요소를 활용해 사용자에게 정보를 직관적으로 전달할 수 있도록 구성했습니다.\n\n공식 이미지에 등장하는 캐릭터를 Illustrator를 활용해 리깅이 가능한 형태로 재구성하여 영상에 적용했으며, 이벤트 요소를 놀이기구 콘셉트의 이미지로 시각화해 콘텐츠의 재미를 더했습니다. Kling을 활용해 놀이기구의 움직임을 구현한 영상을 제작하고 이를 적용하여 콘텐츠 전반에 생동감과 몰입도를 더했습니다. 또한 일부 장면에서는 이벤트 정보를 효과적으로 전달하기 위해 다양한 시각 요소를 결합한 인포그래픽 형태로 구성했습니다.",
     tools: ["Illustrator", "After Effects"],
     aiTools: [
       { category: "Image", tool: "Nanobanana Pro" },
@@ -107,7 +107,7 @@ export default function PortfolioPage() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-45% 0px -45% 0px", // 화면 중앙 10% 영역에 들어올 때 감지
+      rootMargin: "-50% 0px -50% 0px", // 화면 정중앙을 지날 때 감지
       threshold: 0,
     };
 
@@ -133,7 +133,7 @@ export default function PortfolioPage() {
     });
 
     return () => observer.disconnect();
-  }, [activeIndex]);
+  }, []);
 
   return (
     <>
@@ -237,9 +237,11 @@ export default function PortfolioPage() {
                     <span className="line-clamp-2">{project.title}</span>
                   )}
                 </h3>
-                <p className="text-foreground/60 text-sm line-clamp-2 leading-relaxed whitespace-pre-line">
-                  {project.description}
-                </p>
+                <div className="text-foreground/60 text-sm line-clamp-2 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0">
+                  {project.description.split('\n\n').map((para, idx) => (
+                    <p key={idx} className="whitespace-pre-wrap">{para.trim()}</p>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -259,7 +261,8 @@ export default function PortfolioPage() {
             transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 25 }}
             className="w-full flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-2">
+            {/* 고정된 높이를 가진 Header 영역 */}
+            <div className="flex items-center gap-3 mb-2 h-[28px]">
               <span className="text-primary font-bold animate-bounce-soft uppercase tracking-wider text-sm md:text-base">
                 Project 0{activeIndex + 1}
               </span>
@@ -294,42 +297,53 @@ export default function PortfolioPage() {
                 </span>
               )}
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 tracking-tight text-foreground/90">
-              {projects[activeIndex].title.includes('\n') ? (
-                <span className="flex flex-col gap-1">
-                  <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
-                  <span>{projects[activeIndex].title.split('\n')[1]}</span>
-                </span>
-              ) : (
-                projects[activeIndex].title
-              )}
-            </h1>
-            <p className="text-base md:text-lg text-foreground/70 mb-6 w-full max-w-none leading-relaxed font-medium whitespace-pre-line line-clamp-6 md:line-clamp-none pr-2 md:pr-4">
-              {projects[activeIndex].description}
-            </p>
-            <div className={`flex gap-2 flex-wrap ${projects[activeIndex].aiTools ? 'mb-3' : 'mb-8'}`}>
-              {projects[activeIndex].tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="px-4 py-1.5 bg-white text-secondary-foreground font-semibold text-xs md:text-sm rounded-full border-2 border-primary/20 shadow-sm hover:animate-wiggle hover:border-primary/50 transition-colors cursor-default"
-                  style={{ color: "var(--foreground)" }}
-                >
-                  {tool}
-                </span>
+
+            {/* 고정된 높이를 가진 Title 영역 */}
+            <div className="h-[120px] md:h-[130px] lg:h-[150px] flex flex-col justify-start mb-4 overflow-hidden">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground/90">
+                {projects[activeIndex].title.includes('\n') ? (
+                  <span className="flex flex-col gap-1">
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
+                    <span>{projects[activeIndex].title.split('\n')[1]}</span>
+                  </span>
+                ) : (
+                  projects[activeIndex].title
+                )}
+              </h1>
+            </div>
+
+            {/* 고정된 높이를 가진 Description 영역 */}
+            <div className="h-[210px] md:h-[240px] lg:h-[280px] text-base md:text-lg text-foreground/70 mb-6 w-full max-w-none leading-relaxed font-medium overflow-y-auto hide-scrollbar pr-2 md:pr-4 [&>p]:mb-4 [&>p:last-child]:mb-0">
+              {projects[activeIndex].description.split('\n\n').map((paragraph, idx) => (
+                <p key={idx} className="whitespace-pre-wrap">{paragraph.trim()}</p>
               ))}
             </div>
 
-            {/* AI Tools List for specific projects */}
-            {projects[activeIndex].aiTools && (
-              <div className="flex flex-col gap-1 mb-5 pl-4 border-l-2 border-primary/30">
-                {projects[activeIndex].aiTools.map((item, idx) => (
-                  <div key={idx} className="text-sm flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
-                    <span className="font-bold text-primary tracking-widest uppercase text-xs w-16">{item.category}</span>
-                    <span className="text-foreground/70 font-medium">{item.tool}</span>
-                  </div>
+            {/* 고정된 높이를 가진 Tools & AI Tools 영역 */}
+            <div className="h-[90px] md:h-[110px] flex flex-col justify-start mb-4">
+              <div className="flex gap-2 flex-wrap mb-3">
+                {projects[activeIndex].tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-4 py-1.5 bg-white text-secondary-foreground font-semibold text-xs md:text-sm rounded-full border-2 border-primary/20 shadow-sm hover:animate-wiggle hover:border-primary/50 transition-colors cursor-default"
+                    style={{ color: "var(--foreground)" }}
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
-            )}
+
+              {projects[activeIndex].aiTools && (
+                <div className="flex flex-col gap-1 pl-4 border-l-2 border-primary/30">
+                  {projects[activeIndex].aiTools.map((item, idx) => (
+                    <div key={idx} className="text-sm flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
+                      <span className="font-bold text-primary tracking-widest uppercase text-xs w-16">{item.category}</span>
+                      <span className="text-foreground/70 font-medium">{item.tool}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* GIF Spaces (4 slots) */}
             <div className="grid grid-cols-4 gap-3 w-full max-w-none pr-2 md:pr-4">
