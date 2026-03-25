@@ -255,10 +255,10 @@ export default function PortfolioPage() {
         <AnimatePresence mode="wait">
           <motion.div
             key={projects[activeIndex].id}
-            initial={{ opacity: 0, y: 15, scale: 0.99 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -15, scale: 0.99 }}
-            transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 25 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             className="w-full flex flex-col"
           >
             {/* 고정된 높이를 가진 Header 영역 */}
@@ -298,8 +298,8 @@ export default function PortfolioPage() {
               )}
             </div>
 
-            {/* 고정된 높이를 가진 Title 영역 */}
-            <div className="h-[120px] md:h-[130px] lg:h-[150px] flex flex-col justify-start mb-4 overflow-hidden">
+            {/* Title 영역 */}
+            <div className="flex flex-col justify-start mb-6 overflow-hidden">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground/90">
                 {projects[activeIndex].title.includes('\n') ? (
                   <span className="flex flex-col gap-1">
@@ -312,15 +312,15 @@ export default function PortfolioPage() {
               </h1>
             </div>
 
-            {/* 고정된 높이를 가진 Description 영역 */}
-            <div className="h-[210px] md:h-[240px] lg:h-[280px] text-base md:text-lg text-foreground/70 mb-6 w-full max-w-none leading-relaxed font-medium overflow-y-auto hide-scrollbar pr-2 md:pr-4 [&>p]:mb-4 [&>p:last-child]:mb-0">
+            {/* Description 영역 */}
+            <div className="max-h-[210px] md:max-h-[240px] lg:max-h-[280px] text-base md:text-lg text-foreground/70 mb-8 w-full max-w-none leading-relaxed font-medium overflow-y-auto hide-scrollbar pr-2 md:pr-4 [&>p]:mb-4 [&>p:last-child]:mb-0">
               {projects[activeIndex].description.split('\n\n').map((paragraph, idx) => (
                 <p key={idx} className="whitespace-pre-wrap">{paragraph.trim()}</p>
               ))}
             </div>
 
-            {/* 고정된 높이를 가진 Tools & AI Tools 영역 */}
-            <div className="h-[90px] md:h-[110px] flex flex-col justify-start mb-4">
+            {/* Tools & AI Tools 영역 */}
+            <div className="flex flex-col justify-start mb-4">
               <div className="flex gap-2 flex-wrap mb-3">
                 {projects[activeIndex].tools.map((tool) => (
                   <span
