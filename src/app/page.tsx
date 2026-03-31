@@ -96,6 +96,22 @@ export default function PortfolioPage() {
   const [selectedGif, setSelectedGif] = useState<string | null>(null); // GIF 팝업용 상태 추가
   const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string; } | null>(null); // 비디오 팝업용 상태 추가
 
+  // 인라인 재생용 상태
+  const [playingGridId, setPlayingGridId] = useState<number | null>(null);
+  const [playingScrollId, setPlayingScrollId] = useState<number | null>(null);
+  const [playingOtherId, setPlayingOtherId] = useState<number | null>(null);
+  const [playingArchiveId, setPlayingArchiveId] = useState<number | null>(null);
+
+  const getHighQualityVideoUrl = (url: string) => {
+    if (url.includes("youtu")) {
+      return url.replace("youtu.be/", "www.youtube.com/embed/")
+                .replace("watch?v=", "embed/")
+                .replace("youtube.com/shorts/", "www.youtube.com/embed/")
+                .split("?")[0] + "?autoplay=1&vq=hd1080&rel=0&modestbranding=1";
+    }
+    return url;
+  };
+
   // 전역 이벤트 리스너 (헤더 내 About 등 외부 클릭에서 모달 열기용)
   useEffect(() => {
     const handleOpenModal = () => setIsContactModalOpen(true);
@@ -179,34 +195,53 @@ export default function PortfolioPage() {
             >
               {/* Thumbnail Container (큰 영상 팝업 띄우기 / 썸네일 이미지 보여주기) */}
               <div 
-                className="group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 cursor-pointer"
+                className={`group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 ${playingGridId === project.id ? '' : 'cursor-pointer'}`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (project.videoUrl) {
-                    setSelectedVideo({ url: project.videoUrl, title: project.title });
+                  if (project.videoUrl && playingGridId !== project.id) {
+                    setPlayingGridId(project.id);
                   }
                 }}
               >
-                {project.thumbnailUrl ? (
-                  <img 
-                    src={project.thumbnailUrl} 
-                    alt={`${project.title} thumbnail`} 
-                    className={`w-full h-full ${project.isShorts ? 'object-contain bg-black' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`}
-                  />
+                {playingGridId === project.id ? (
+                  project.videoUrl.includes("youtu") ? (
+                    <iframe
+                      src={getHighQualityVideoUrl(project.videoUrl)}
+                      className="w-full h-full border-none"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                      title={project.title}
+                    />
+                  ) : (
+                    <video 
+                      src={project.videoUrl} 
+                      controls 
+                      autoPlay 
+                      className="w-full h-full object-contain bg-black"
+                    />
+                  )
+                ) : project.thumbnailUrl ? (
+                  <>
+                    <img 
+                      src={project.thumbnailUrl} 
+                      alt={`${project.title} thumbnail`} 
+                      className={`w-full h-full ${project.isShorts ? 'object-contain bg-black' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`}
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                      <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 delay-100 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <OptimizedVideo 
                     src={project.videoUrl} 
                     isActive={true} 
                   />
                 )}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 delay-100 pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                </div>
               </div>
 
               {/* Info Container (해당 프로젝트 영역으로 부드럽게 스크롤) */}
@@ -431,14 +466,31 @@ export default function PortfolioPage() {
                 className="w-full h-full bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-2 border-white/50 relative group"
               >
                 <div 
-                  className="w-full h-full relative group cursor-pointer"
+                  className={`w-full h-full relative group ${playingScrollId === project.id ? '' : 'cursor-pointer'}`}
                   onClick={() => {
-                    if (project.videoUrl) {
-                      setSelectedVideo({ url: project.videoUrl, title: project.title });
+                    if (project.videoUrl && playingScrollId !== project.id) {
+                      setPlayingScrollId(project.id);
                     }
                   }}
                 >
-                  {project.thumbnailUrl ? (
+                  {playingScrollId === project.id ? (
+                    project.videoUrl.includes("youtu") ? (
+                      <iframe
+                        src={getHighQualityVideoUrl(project.videoUrl)}
+                        className="w-full h-full border-none rounded-[2rem]"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                        title={project.title}
+                      />
+                    ) : (
+                      <video 
+                        src={project.videoUrl} 
+                        controls 
+                        autoPlay 
+                        className="w-full h-full object-contain bg-black rounded-[2rem]"
+                      />
+                    )
+                  ) : project.thumbnailUrl ? (
                     <>
                       <img 
                         src={project.thumbnailUrl} 
@@ -447,7 +499,7 @@ export default function PortfolioPage() {
                       />
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                        <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 delay-100 shadow-xl">
+                        <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 delay-100 shadow-xl pointer-events-none">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -500,19 +552,44 @@ export default function PortfolioPage() {
               className="group cursor-pointer flex flex-col gap-3"
             >
               <div 
-                className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-900 border border-white/10 group-hover:border-primary/40 transition-colors duration-500"
-                onClick={() => setSelectedVideo({ url: project.videoUrl, title: project.title })}
+                className={`relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-900 border border-white/10 group-hover:border-primary/40 transition-colors duration-500 ${playingOtherId === project.id ? '' : 'cursor-pointer'}`}
+                onClick={() => {
+                  if (project.videoUrl && playingOtherId !== project.id) {
+                    setPlayingOtherId(project.id);
+                  }
+                }}
               >
-                <OptimizedVideo 
-                  src={project.videoUrl} 
-                  isActive={true} 
-                />
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                  <span className="text-white font-semibold tracking-wider text-sm border border-white/50 px-4 py-2 rounded-full scale-90 group-hover:scale-100 transition-all duration-300">
-                    Play
-                  </span>
-                </div>
+                {playingOtherId === project.id ? (
+                  project.videoUrl.includes("youtu") ? (
+                    <iframe
+                      src={getHighQualityVideoUrl(project.videoUrl)}
+                      className="w-full h-full border-none"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                      title={project.title}
+                    />
+                  ) : (
+                    <video 
+                      src={project.videoUrl} 
+                      controls 
+                      autoPlay 
+                      className="w-full h-full object-contain bg-black"
+                    />
+                  )
+                ) : (
+                  <>
+                    <OptimizedVideo 
+                      src={project.videoUrl} 
+                      isActive={true} 
+                    />
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm pointer-events-none">
+                      <span className="text-white font-semibold tracking-wider text-sm border border-white/50 px-4 py-2 rounded-full scale-90 group-hover:scale-100 transition-all duration-300">
+                        Play
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
               <h4 className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors text-center px-2 truncate">
                 {project.title}
@@ -734,9 +811,37 @@ export default function PortfolioPage() {
                     transition={{ delay: i * 0.05 }}
                     className="group relative flex flex-col gap-3"
                   >
-                    <div className="relative aspect-video rounded-xl overflow-hidden bg-zinc-900 border border-white/10 group-hover:border-primary/50 transition-colors">
-                      <OptimizedVideo src={proj.videoUrl} isActive={true} />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div 
+                      className={`relative aspect-video rounded-xl overflow-hidden bg-zinc-900 border border-white/10 group-hover:border-primary/50 transition-colors ${playingArchiveId === proj.id ? '' : 'cursor-pointer'}`}
+                      onClick={() => {
+                        if (proj.videoUrl && playingArchiveId !== proj.id) {
+                          setPlayingArchiveId(proj.id);
+                        }
+                      }}
+                    >
+                      {playingArchiveId === proj.id ? (
+                        proj.videoUrl.includes("youtu") ? (
+                          <iframe
+                            src={getHighQualityVideoUrl(proj.videoUrl)}
+                            className="w-full h-full border-none"
+                            allow="autoplay; encrypted-media"
+                            allowFullScreen
+                            title={proj.title}
+                          />
+                        ) : (
+                          <video 
+                            src={proj.videoUrl} 
+                            controls 
+                            autoPlay 
+                            className="w-full h-full object-contain bg-black"
+                          />
+                        )
+                      ) : (
+                        <>
+                          <OptimizedVideo src={proj.videoUrl} isActive={true} />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        </>
+                      )}
                     </div>
                     <div>
                       <h4 className="font-bold text-foreground group-hover:text-primary transition-colors truncate">
@@ -809,58 +914,7 @@ export default function PortfolioPage() {
       )}
     </AnimatePresence>
 
-    {/* --- Video Fullscreen Modal Overlay --- */}
-    <AnimatePresence>
-      {selectedVideo && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedVideo(null)}
-            className="absolute inset-0 bg-background/95 backdrop-blur-xl cursor-zoom-out"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", bounce: 0.3 }}
-            className="relative w-full max-w-7xl aspect-video flex flex-col items-center justify-center pointer-events-none"
-          >
-            {/* 닫기 버튼 */}
-            <button 
-              onClick={() => setSelectedVideo(null)}
-              className="absolute -top-12 right-0 md:-right-12 p-3 rounded-full bg-foreground/10 hover:bg-foreground/20 text-foreground transition-colors pointer-events-auto z-10"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div className="w-full h-full rounded-2xl shadow-2xl overflow-hidden border border-foreground/10 pointer-events-auto relative bg-black">
-               {selectedVideo.url.includes("youtu") ? (
-                 <iframe
-                   src={selectedVideo.url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/").replace("youtube.com/shorts/", "www.youtube.com/embed/").split("?")[0] + "?autoplay=1"}
-                   className="w-full h-full border-none"
-                   allow="autoplay; encrypted-media"
-                   allowFullScreen
-                   title={selectedVideo.title}
-                 />
-               ) : (
-                 <video 
-                   src={selectedVideo.url} 
-                   controls 
-                   autoPlay 
-                   className="w-full h-full object-contain"
-                 />
-               )}
-               <div className="absolute top-4 left-4 px-4 py-2 bg-black/50 backdrop-blur-md rounded-full border border-white/10 text-white text-sm font-semibold tracking-wider">
-                 {selectedVideo.title}
-               </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+    {/* --- Video Fullscreen Modal Overlay (Removed) --- */}
 
     </>
   );
