@@ -120,35 +120,56 @@ export default function PortfolioPage() {
   }, []);
 
   // 스크롤 위치에 따라 현재 활성화된 프로젝트 인덱스 업데이트
+  // 스크롤 위치에 따라 현재 활성화된 프로젝트 인덱스 업데이트
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-50% 0px -50% 0px", // 화면 정중앙을 지날 때 감지
-      threshold: 0,
-    };
+    let observer: IntersectionObserver;
+    
+    const updateObserver = () => {
+      if (observer) observer.disconnect();
+      
+      const isMobile = window.innerWidth < 768;
+      const observerOptions = {
+        root: null,
+        rootMargin: isMobile ? "-65% 0px -15% 0px" : "-50% 0px -50% 0px", // 모바일은 하단 영역에서 감지
+        threshold: 0,
+      };
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const indexStr = entry.target.getAttribute("data-index");
-          if (indexStr !== null) {
-            setActiveIndex(Number(indexStr));
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const indexStr = entry.target.getAttribute("data-index");
+            if (indexStr !== null) {
+              setActiveIndex(Number(indexStr));
+            }
           }
+        });
+      };
+
+      observer = new IntersectionObserver(observerCallback, observerOptions);
+      const sections = document.querySelectorAll(".project-video-section");
+      
+      sections.forEach((section, index) => {
+        if (!section.hasAttribute("data-index")) {
+          section.setAttribute("data-index", index.toString());
         }
+        observer.observe(section);
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = document.querySelectorAll(".project-video-section");
-    
-    sections.forEach((section, index) => {
-      if (!section.hasAttribute("data-index")) {
-        section.setAttribute("data-index", index.toString());
-      }
-      observer.observe(section);
-    });
+    updateObserver();
 
-    return () => observer.disconnect();
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateObserver, 100);
+    };
+    
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      if (observer) observer.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -195,7 +216,7 @@ export default function PortfolioPage() {
             >
               {/* Thumbnail Container (큰 영상 팝업 띄우기 / 썸네일 이미지 보여주기) */}
               <div 
-                className={`group relative z-10 aspect-video rounded-3xl overflow-hidden bg-zinc-900 shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 ${playingGridId === project.id ? '' : 'cursor-pointer'}`}
+                className={`group relative z-10 aspect-video rounded-3xl overflow-hidden bg-black shadow-lg border border-white/10 hover:border-primary/50 transition-colors duration-500 ${playingGridId === project.id ? '' : 'cursor-pointer'}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (project.videoUrl && playingGridId !== project.id) {
@@ -207,7 +228,7 @@ export default function PortfolioPage() {
                   project.videoUrl.includes("youtu") ? (
                     <iframe
                       src={getHighQualityVideoUrl(project.videoUrl)}
-                      className="w-full h-full border-none"
+                      className="w-full h-full border-none bg-black"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
                       title={project.title}
@@ -286,7 +307,7 @@ export default function PortfolioPage() {
 
       <main id="work" className="flex flex-col md:flex-row md:items-start min-h-screen bg-background text-foreground transition-colors duration-500 relative z-10">
       {/* --- 좌측 섹션 (Sticky) --- */}
-      <section className="md:w-1/2 h-screen sticky top-0 flex flex-col justify-center p-8 lg:p-16 overflow-hidden bg-gradient-to-br from-background to-accent/20">
+      <section className="w-full md:w-1/2 h-[55vh] md:h-screen sticky top-0 flex flex-col justify-end md:justify-center p-6 md:p-8 lg:p-16 overflow-hidden bg-background md:bg-gradient-to-br md:from-background md:to-accent/20 z-20 shadow-[0_15px_30px_rgba(0,0,0,0.6)] md:shadow-none border-b border-foreground/10 md:border-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={projects[activeIndex].id}
@@ -334,11 +355,11 @@ export default function PortfolioPage() {
             </div>
 
             {/* Title 영역 */}
-            <div className="flex flex-col justify-start mb-6 overflow-hidden">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground/90">
+            <div className="flex flex-col justify-start mb-4 md:mb-6 overflow-hidden">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground/90">
                 {projects[activeIndex].title.includes('\n') ? (
                   <span className="flex flex-col gap-1">
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
                     <span>{projects[activeIndex].title.split('\n')[1]}</span>
                   </span>
                 ) : (
@@ -434,7 +455,7 @@ export default function PortfolioPage() {
         </AnimatePresence>
 
         {/* 인디케이터 */}
-        <div className="absolute bottom-12 left-12 flex gap-3">
+        <div className="absolute bottom-4 md:bottom-12 left-6 md:left-12 flex gap-3 z-30">
           {projects.map((_, i) => (
             <div
               key={i}
@@ -447,11 +468,11 @@ export default function PortfolioPage() {
       </section>
 
       {/* --- 우측 섹션 (Scroll) --- */}
-      <section className="md:w-1/2 bg-background/50">
+      <section className="w-full md:w-1/2 bg-transparent md:bg-background/50 relative z-10 pt-4 md:pt-0">
         {projects.map((project, index) => (
           <div
             key={project.id}
-            className="project-video-section h-[80vh] md:h-screen flex items-center justify-center p-6 md:p-12 perspective-1000"
+            className="project-video-section h-[40vh] md:h-screen flex items-center justify-center p-4 md:p-12 mb-12 md:mb-0 perspective-1000"
           >
             <motion.div 
               initial={{ opacity: 0, scale: 0.8, y: 80 }}
@@ -477,7 +498,7 @@ export default function PortfolioPage() {
                     project.videoUrl.includes("youtu") ? (
                       <iframe
                         src={getHighQualityVideoUrl(project.videoUrl)}
-                        className="w-full h-full border-none rounded-[2rem]"
+                        className="w-full h-full border-none rounded-[2rem] bg-black"
                         allow="autoplay; encrypted-media"
                         allowFullScreen
                         title={project.title}
@@ -552,7 +573,7 @@ export default function PortfolioPage() {
               className="group cursor-pointer flex flex-col gap-3"
             >
               <div 
-                className={`relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-900 border border-white/10 group-hover:border-primary/40 transition-colors duration-500 ${playingOtherId === project.id ? '' : 'cursor-pointer'}`}
+                className={`relative aspect-[4/5] rounded-2xl overflow-hidden bg-black border border-white/10 group-hover:border-primary/40 transition-colors duration-500 ${playingOtherId === project.id ? '' : 'cursor-pointer'}`}
                 onClick={() => {
                   if (project.videoUrl && playingOtherId !== project.id) {
                     setPlayingOtherId(project.id);
@@ -563,7 +584,7 @@ export default function PortfolioPage() {
                   project.videoUrl.includes("youtu") ? (
                     <iframe
                       src={getHighQualityVideoUrl(project.videoUrl)}
-                      className="w-full h-full border-none"
+                      className="w-full h-full border-none bg-black"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
                       title={project.title}
