@@ -307,7 +307,7 @@ export default function PortfolioPage() {
 
       <main id="work" className="flex flex-col lg:flex-row lg:items-start min-h-screen bg-background text-foreground transition-colors duration-500 relative z-10">
       {/* --- 좌측 섹션 (Sticky) --- */}
-      <section className="w-full lg:w-1/2 h-[55vh] lg:h-screen sticky top-0 flex flex-col justify-end lg:justify-center p-6 md:p-8 lg:p-16 overflow-hidden bg-background lg:bg-gradient-to-br lg:from-background lg:to-accent/20 z-20 shadow-[0_15px_30px_rgba(0,0,0,0.6)] lg:shadow-none border-b border-foreground/10 lg:border-none">
+      <section className="w-full lg:w-1/2 h-[60vh] lg:h-screen sticky top-0 flex flex-col justify-end lg:justify-center p-5 pb-10 md:p-8 lg:p-16 overflow-hidden bg-background lg:bg-gradient-to-br lg:from-background lg:to-accent/20 z-20 shadow-[0_15px_30px_rgba(0,0,0,0.6)] lg:shadow-none border-b border-foreground/10 lg:border-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={projects[activeIndex].id}
@@ -315,7 +315,7 @@ export default function PortfolioPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="w-full flex flex-col"
+            className="w-full flex flex-col h-full justify-center pt-2 lg:pt-0"
           >
             {/* 고정된 높이를 가진 Header 영역 */}
             <div className="flex items-center gap-3 mb-2 h-[28px]">
@@ -355,11 +355,11 @@ export default function PortfolioPage() {
             </div>
 
             {/* Title 영역 */}
-            <div className="flex flex-col justify-start mb-4 md:mb-6 overflow-hidden">
+            <div className="flex flex-col justify-start mb-2 md:mb-4 lg:mb-6 overflow-hidden">
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground/90">
                 {projects[activeIndex].title.includes('\n') ? (
                   <span className="flex flex-col gap-1">
-                    <span className="text-xl md:text-2xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
+                    <span className="text-lg md:text-2xl lg:text-4xl font-bold text-foreground/60 tracking-wider">{projects[activeIndex].title.split('\n')[0]}</span>
                     <span>{projects[activeIndex].title.split('\n')[1]}</span>
                   </span>
                 ) : (
@@ -369,15 +369,15 @@ export default function PortfolioPage() {
             </div>
 
             {/* Description 영역 */}
-            <div className="max-h-[210px] md:max-h-[240px] lg:max-h-[280px] text-base md:text-lg text-foreground/70 mb-8 w-full max-w-none leading-relaxed font-medium overflow-y-auto hide-scrollbar pr-2 md:pr-4 [&>p]:mb-4 [&>p:last-child]:mb-0">
+            <div className="max-h-[22vh] md:max-h-[28vh] lg:max-h-[280px] text-[14.5px] md:text-base lg:text-lg text-foreground/70 mb-4 lg:mb-8 w-full max-w-none leading-relaxed font-medium overflow-y-auto hide-scrollbar pr-2 lg:pr-4 [&>p]:mb-2 lg:[&>p]:mb-4 [&>p:last-child]:mb-0">
               {projects[activeIndex].description.split('\n\n').map((paragraph, idx) => (
                 <p key={idx} className="whitespace-pre-wrap">{paragraph.trim()}</p>
               ))}
             </div>
 
             {/* Tools & AI Tools 영역 */}
-            <div className="flex flex-col justify-start mb-4">
-              <div className="flex gap-2 flex-wrap mb-3">
+            <div className="flex flex-col justify-start mb-2 lg:mb-4">
+              <div className="flex gap-2 flex-wrap mb-2 lg:mb-3">
                 {projects[activeIndex].tools.map((tool) => (
                   <span
                     key={tool}
@@ -455,7 +455,7 @@ export default function PortfolioPage() {
         </AnimatePresence>
 
         {/* 인디케이터 */}
-        <div className="absolute bottom-4 lg:bottom-12 left-6 lg:left-12 flex gap-3 z-30">
+        <div className="absolute bottom-3 md:bottom-5 lg:bottom-12 left-6 lg:left-12 flex gap-3 z-30">
           {projects.map((_, i) => (
             <div
               key={i}
